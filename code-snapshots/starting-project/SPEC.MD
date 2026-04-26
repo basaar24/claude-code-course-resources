@@ -162,7 +162,7 @@ CREATE TABLE session (
   userAgent TEXT,
   createdAt TEXT NOT NULL DEFAULT (datetime('now')),
   updatedAt TEXT NOT NULL DEFAULT (datetime('now')),
-  FOREIGN KEY (userId) REFERENCES user(id)
+  FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE
 );
 ```
 
@@ -194,7 +194,7 @@ CREATE TABLE account (
   password TEXT,
   createdAt TEXT NOT NULL DEFAULT (datetime('now')),
   updatedAt TEXT NOT NULL DEFAULT (datetime('now')),
-  FOREIGN KEY (userId) REFERENCES user(id)
+  FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE
 );
 ```
 
