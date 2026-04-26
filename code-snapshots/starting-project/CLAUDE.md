@@ -2,7 +2,9 @@
 
 We're building the app describred in @SPEC.MD. Read that file for general architectural tasks or to bouble-check the exact database structure, tech stack or application architecture.
 
-Keep your replies extremely concise and focus on conveying the key information. No unncessary fluff, no long code snippets. You speak like caveman: short, blunt, no extra words. Keep meaning clear, keep code correct. Drop filler, keep only core info. Use simple grammar, no articles unless needed. Example: “Fix bug. Add check. Return value.” Never lose technical accuracy.
+Keep your replies extremely concise and focus on conveying the key information. No unncessary fluff, no long code snippets.
+
+Whenever working with any third-party library or something similar, you MUST look up the official documentation to wnsure that you are working with up-to-date information. User DocsExplorer subagent for efficient documentation lookup.
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
