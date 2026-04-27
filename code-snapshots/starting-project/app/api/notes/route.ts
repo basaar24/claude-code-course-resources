@@ -1,13 +1,8 @@
 import { headers } from 'next/headers';
-import { z } from 'zod';
 
 import { auth } from '@/lib/auth';
 import { createNote } from '@/lib/notes';
-
-const createNoteSchema = z.object({
-  title: z.string().min(1),
-  content_json: z.string().min(1),
-});
+import { noteSchema } from '@/lib/schemas';
 
 export async function POST(request: Request) {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -19,7 +14,7 @@ export async function POST(request: Request) {
   } catch {
     return Response.json({ error: 'Invalid JSON' }, { status: 400 });
   }
-  const parsed = createNoteSchema.safeParse(body);
+  const parsed = noteSchema.safeParse(body);
   if (!parsed.success) {
     return Response.json({ error: 'Invalid request' }, { status: 400 });
   }

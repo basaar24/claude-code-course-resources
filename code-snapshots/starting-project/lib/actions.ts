@@ -3,20 +3,14 @@
 import { headers } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { z } from 'zod';
-
 import { auth } from './auth';
 import { createNote, deleteNote, setNoteSharing, updateNote } from './notes';
+import { noteSchema } from './schemas';
 
 export async function signOutAction() {
   await auth.api.signOut({ headers: await headers() });
   redirect('/authenticate');
 }
-
-const noteSchema = z.object({
-  title: z.string().min(1),
-  content_json: z.string().min(1),
-});
 
 export async function createNoteAction(
   _prev: { error: string } | null,
