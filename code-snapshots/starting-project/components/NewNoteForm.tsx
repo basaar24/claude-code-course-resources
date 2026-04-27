@@ -2,23 +2,17 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import NoteEditor from "./NoteEditor";
 
 export default function NewNoteForm() {
   const router = useRouter();
   const [title, setTitle] = useState("");
+  const [contentJson, setContentJson] = useState<object | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const editor = useEditor({
-    extensions: [StarterKit],
-    immediatelyRender: false,
-  });
-
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!editor) return;
 
     setLoading(true);
     setError(null);
@@ -29,7 +23,7 @@ export default function NewNoteForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title,
-          content_json: JSON.stringify(editor.getJSON()),
+          content_json: contentJson ? JSON.stringify(contentJson) : undefined,
         }),
       });
 
@@ -73,9 +67,7 @@ export default function NewNoteForm() {
 
       <div className="flex flex-col gap-2">
         <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Content</label>
-        <div className="min-h-48 rounded-md border border-gray-300 bg-white px-4 py-3 text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-white [&_.tiptap]:outline-none [&_.tiptap_p]:my-1">
-          <EditorContent editor={editor} />
-        </div>
+        <NoteEditor onChange={setContentJson} />
       </div>
 
       <button
