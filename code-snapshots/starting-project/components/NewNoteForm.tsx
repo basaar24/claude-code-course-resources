@@ -51,13 +51,13 @@ export default function NewNoteForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       {error && (
-        <p role="alert" className="rounded-md bg-red-950 px-4 py-3 text-sm text-red-400">
+        <p role="alert" className="rounded-md bg-red-50 px-4 py-3 text-sm text-red-600 dark:bg-red-950 dark:text-red-400">
           {error}
         </p>
       )}
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="title" className="text-sm font-medium text-gray-300">
+        <label htmlFor="title" className="text-sm font-medium text-gray-700 dark:text-gray-300">
           Title
         </label>
         <input
@@ -67,13 +67,13 @@ export default function NewNoteForm() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Note title"
-          className="rounded-md border border-gray-700 bg-gray-900 px-4 py-2.5 text-white placeholder-gray-500 outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
+          className="rounded-md border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-400 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500"
         />
       </div>
 
       <div className="flex flex-col gap-2">
-        <label className="text-sm font-medium text-gray-300">Content</label>
-        <div className="min-h-48 rounded-md border border-gray-700 bg-gray-900 px-4 py-3 text-white [&_.tiptap]:outline-none [&_.tiptap_p]:my-1">
+        <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Content</label>
+        <div className="min-h-48 rounded-md border border-gray-300 bg-white px-4 py-3 text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-white [&_.tiptap]:outline-none [&_.tiptap_p]:my-1">
           <EditorContent editor={editor} />
         </div>
       </div>
@@ -81,7 +81,7 @@ export default function NewNoteForm() {
       <button
         type="submit"
         disabled={loading}
-        className="self-end rounded-md bg-white px-5 py-2.5 text-sm font-semibold text-gray-950 hover:bg-gray-200 disabled:opacity-50 transition-colors cursor-pointer"
+        className="self-end rounded-md bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-700 disabled:opacity-50 transition-colors cursor-pointer dark:bg-white dark:text-gray-950 dark:hover:bg-gray-200"
       >
         {loading ? "Creating…" : "Create note"}
       </button>

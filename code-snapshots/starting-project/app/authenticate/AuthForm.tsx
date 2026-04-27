@@ -36,15 +36,15 @@ export function AuthForm({ mode }: { mode: Mode }) {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-950">
-      <div className="w-full max-w-sm bg-gray-900 rounded-2xl shadow-sm border border-gray-800 p-8">
-        <h1 className="text-xl font-semibold text-gray-100 mb-6">
+    <main className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-950">
+      <div className="w-full max-w-sm rounded-2xl border border-gray-200 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <h1 className="mb-6 text-xl font-semibold text-gray-900 dark:text-gray-100">
           {isRegister ? "Create an account" : "Welcome back"}
         </h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className="text-sm font-medium text-gray-300">
+            <label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Email
             </label>
             <input
@@ -54,12 +54,12 @@ export function AuthForm({ mode }: { mode: Mode }) {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="rounded-lg border border-gray-700 bg-gray-800 text-gray-100 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+              className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-400 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
             />
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className="text-sm font-medium text-gray-300">
+            <label htmlFor="password" className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Password
             </label>
             <input
@@ -69,18 +69,18 @@ export function AuthForm({ mode }: { mode: Mode }) {
               autoComplete={isRegister ? "new-password" : "current-password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="rounded-lg border border-gray-700 bg-gray-800 text-gray-100 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+              className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-400 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
             />
           </div>
 
           {error && (
-            <p className="text-sm text-red-600">{error}</p>
+            <p role="alert" className="text-sm text-red-600 dark:text-red-400">{error}</p>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className="mt-1 rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-white disabled:opacity-50 transition-colors"
+            className="mt-1 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 disabled:opacity-50 transition-colors dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-white"
           >
             {loading ? "Please wait…" : isRegister ? "Create account" : "Sign in"}
           </button>
@@ -90,14 +90,14 @@ export function AuthForm({ mode }: { mode: Mode }) {
           {isRegister ? (
             <>
               Already have an account?{" "}
-              <Link href="/authenticate?mode=login" className="font-medium text-gray-300 hover:underline">
+              <Link href="/authenticate?mode=login" className="font-medium text-gray-700 hover:underline dark:text-gray-300">
                 Sign in
               </Link>
             </>
           ) : (
             <>
               Don&apos;t have an account?{" "}
-              <Link href="/authenticate?mode=register" className="font-medium text-gray-300 hover:underline">
+              <Link href="/authenticate?mode=register" className="font-medium text-gray-700 hover:underline dark:text-gray-300">
                 Create one
               </Link>
             </>

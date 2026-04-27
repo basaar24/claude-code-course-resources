@@ -1,23 +1,19 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { signOutAction } from "@/lib/actions";
 
-import { authClient } from "@/lib/auth-client";
-
-export default function LogoutButton() {
-  const router = useRouter();
-
-  async function handleLogout() {
-    await authClient.signOut();
-    router.push("/authenticate");
-  }
-
+export default function LogoutButton({ userName }: { userName: string }) {
   return (
-    <button
-      onClick={handleLogout}
-      className="text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-    >
-      Log out
-    </button>
+    <form action={signOutAction} className="flex items-center gap-3">
+      <span className="hidden text-sm text-gray-500 dark:text-gray-400 sm:block">
+        {userName}
+      </span>
+      <button
+        type="submit"
+        className="text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors cursor-pointer"
+      >
+        Log out
+      </button>
+    </form>
   );
 }
