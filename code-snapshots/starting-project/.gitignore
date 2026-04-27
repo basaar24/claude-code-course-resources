@@ -44,4 +44,5 @@ next-env.d.ts
 data/*.db
 *.db-wal
 *.db-shm
-code-snapshots/starting-project/.claude/settings.local.json
+.playwright-mcp/
+*.playwright.yaml

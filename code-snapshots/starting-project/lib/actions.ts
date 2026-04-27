@@ -63,10 +63,10 @@ export async function deleteNoteAction(noteId: string): Promise<void> {
 export async function toggleSharingAction(
   noteId: string,
   isPublic: boolean,
-): Promise<{ error?: string }> {
+): Promise<{ error?: string; slug?: string | null }> {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) return { error: 'Unauthorized' };
-  setNoteSharing(noteId, session.user.id, isPublic);
+  const note = setNoteSharing(noteId, session.user.id, isPublic);
   revalidatePath(`/notes/${noteId}`);
-  return {};
+  return { slug: note.public_slug };
 }

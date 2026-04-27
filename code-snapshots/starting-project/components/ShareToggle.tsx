@@ -23,6 +23,8 @@ export default function ShareToggle({ note }: { note: Note }) {
       if (result.error) {
         setIsPublic(!next);
         setSlug(note.public_slug);
+      } else if (next) {
+        setSlug(result.slug ?? null);
       }
     });
   }
