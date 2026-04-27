@@ -1,4 +1,4 @@
-import { get, run } from "./db";
+import { get, query, run } from "./db";
 
 export type Note = {
   id: string;
@@ -10,6 +10,20 @@ export type Note = {
   created_at: string;
   updated_at: string;
 };
+
+export function getNotesByUser(userId: string): Note[] {
+  return query<Note>(
+    `SELECT * FROM notes WHERE user_id = ? ORDER BY updated_at DESC`,
+    [userId]
+  );
+}
+
+export function getNoteById(id: string, userId: string): Note | undefined {
+  return get<Note>(
+    `SELECT * FROM notes WHERE id = ? AND user_id = ?`,
+    [id, userId]
+  );
+}
 
 export function createNote(
   userId: string,
