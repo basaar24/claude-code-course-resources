@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { requireAuth } from '@/lib/auth';
 import { getNoteById } from '@/lib/notes';
 import DeleteNoteButton from '@/components/DeleteNoteButton';
+import ShareToggle from '@/components/ShareToggle';
 import TipTapRenderer from '@/components/TipTapRenderer';
 
 type Props = { params: Promise<{ id: string }> };
@@ -40,6 +41,7 @@ export default async function NoteViewPage({ params }: Props) {
         {note.updated_at !== note.created_at && <> &middot; Updated {fmt(note.updated_at)}</>}
       </p>
       <TipTapRenderer contentJson={note.content_json} />
+      <ShareToggle note={note} />
     </main>
   );
 }

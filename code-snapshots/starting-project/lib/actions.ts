@@ -1,11 +1,12 @@
 'use server';
 
 import { headers } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
 import { auth } from './auth';
-import { createNote, deleteNote, updateNote } from './notes';
+import { createNote, deleteNote, setNoteSharing, updateNote } from './notes';
 
 export async function signOutAction() {
   await auth.api.signOut({ headers: await headers() });
@@ -57,4 +58,15 @@ export async function deleteNoteAction(noteId: string): Promise<void> {
   if (!session) redirect('/authenticate');
   deleteNote(noteId, session.user.id);
   redirect('/dashboard');
+}
+
+export async function toggleSharingAction(
+  noteId: string,
+  isPublic: boolean,
+): Promise<{ error?: string }> {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) return { error: 'Unauthorized' };
+  setNoteSharing(noteId, session.user.id, isPublic);
+  revalidatePath(`/notes/${noteId}`);
+  return {};
 }

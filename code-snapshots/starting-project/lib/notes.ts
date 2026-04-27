@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 import { get, query, run } from './db';
 
 export type Note = {
@@ -40,4 +42,24 @@ export function createNote(userId: string, title: string, contentJson: string): 
     contentJson,
   ]);
   return get<Note>(`SELECT * FROM notes WHERE id = ?`, [id])!;
+}
+
+export function setNoteSharing(id: string, userId: string, isPublic: boolean): Note {
+  if (isPublic) {
+    const slug = nanoid(16);
+    run(
+      `UPDATE notes SET is_public = 1, public_slug = ?, updated_at = datetime('now') WHERE id = ? AND user_id = ?`,
+      [slug, id, userId],
+    );
+  } else {
+    run(
+      `UPDATE notes SET is_public = 0, public_slug = NULL, updated_at = datetime('now') WHERE id = ? AND user_id = ?`,
+      [id, userId],
+    );
+  }
+  return get<Note>(`SELECT * FROM notes WHERE id = ?`, [id])!;
+}
+
+export function getPublicNote(slug: string): Note | undefined {
+  return get<Note>(`SELECT * FROM notes WHERE public_slug = ? AND is_public = 1`, [slug]);
 }
