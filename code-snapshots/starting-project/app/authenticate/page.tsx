@@ -1,4 +1,4 @@
-import { AuthForm } from "./AuthForm";
+import { AuthForm } from './AuthForm';
 
 export default async function AuthenticatePage({
   searchParams,
@@ -6,5 +6,5 @@ export default async function AuthenticatePage({
   searchParams: Promise<{ mode?: string }>;
 }) {
   const { mode } = await searchParams;
-  return <AuthForm mode={mode === "register" ? "register" : "login"} />;
+  return <AuthForm mode={mode === 'register' ? 'register' : 'login'} />;
 }

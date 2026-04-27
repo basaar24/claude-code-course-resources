@@ -1,20 +1,20 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { requireAuth } from "@/lib/auth";
-import { getNotesByUser } from "@/lib/notes";
-import NoteList from "@/components/NoteList";
+import { requireAuth } from '@/lib/auth';
+import { getNotesByUser } from '@/lib/notes';
+import NoteList from '@/components/NoteList';
 
 export default async function DashboardPage() {
   const session = await requireAuth();
   const notes = getNotesByUser(session.user.id);
 
   return (
-    <main className="mx-auto max-w-5xl px-6 py-10">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">My Notes</h1>
+    <main className='mx-auto max-w-5xl px-6 py-10'>
+      <div className='flex items-center justify-between'>
+        <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>My Notes</h1>
         <Link
-          href="/notes/new"
-          className="rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-700 transition-colors dark:bg-white dark:text-gray-950 dark:hover:bg-gray-200"
+          href='/notes/new'
+          className='rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-700 transition-colors dark:bg-white dark:text-gray-950 dark:hover:bg-gray-200'
         >
           New note
         </Link>

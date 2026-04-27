@@ -1,4 +1,4 @@
-import { get, query, run } from "./db";
+import { get, query, run } from './db';
 
 export type Note = {
   id: string;
@@ -12,29 +12,18 @@ export type Note = {
 };
 
 export function getNotesByUser(userId: string): Note[] {
-  return query<Note>(
-    `SELECT * FROM notes WHERE user_id = ? ORDER BY updated_at DESC`,
-    [userId]
-  );
+  return query<Note>(`SELECT * FROM notes WHERE user_id = ? ORDER BY updated_at DESC`, [userId]);
 }
 
 export function getNoteById(id: string, userId: string): Note | undefined {
-  return get<Note>(
-    `SELECT * FROM notes WHERE id = ? AND user_id = ?`,
-    [id, userId]
-  );
+  return get<Note>(`SELECT * FROM notes WHERE id = ? AND user_id = ?`, [id, userId]);
 }
 
-export function updateNote(
-  id: string,
-  userId: string,
-  title: string,
-  contentJson: string
-): void {
+export function updateNote(id: string, userId: string, title: string, contentJson: string): void {
   run(
     `UPDATE notes SET title = ?, content_json = ?, updated_at = datetime('now')
      WHERE id = ? AND user_id = ?`,
-    [title, contentJson, id, userId]
+    [title, contentJson, id, userId],
   );
 }
 
@@ -42,15 +31,13 @@ export function deleteNote(id: string, userId: string): void {
   run(`DELETE FROM notes WHERE id = ? AND user_id = ?`, [id, userId]);
 }
 
-export function createNote(
-  userId: string,
-  title: string,
-  contentJson: string
-): Note {
+export function createNote(userId: string, title: string, contentJson: string): Note {
   const id = crypto.randomUUID();
-  run(
-    `INSERT INTO notes (id, user_id, title, content_json) VALUES (?, ?, ?, ?)`,
-    [id, userId, title, contentJson]
-  );
+  run(`INSERT INTO notes (id, user_id, title, content_json) VALUES (?, ?, ?, ?)`, [
+    id,
+    userId,
+    title,
+    contentJson,
+  ]);
   return get<Note>(`SELECT * FROM notes WHERE id = ?`, [id])!;
 }

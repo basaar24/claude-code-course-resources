@@ -1,11 +1,11 @@
-import { mkdirSync } from "fs";
-import { Database } from "bun:sqlite";
+import { mkdirSync } from 'fs';
+import { Database } from 'bun:sqlite';
 
-mkdirSync("data", { recursive: true });
+mkdirSync('data', { recursive: true });
 
-const db = new Database("data/app.db", { create: true });
+const db = new Database('data/app.db', { create: true });
 
-db.run("PRAGMA journal_mode = WAL;");
+db.run('PRAGMA journal_mode = WAL;');
 
 db.run(`
   CREATE TABLE IF NOT EXISTS user (
