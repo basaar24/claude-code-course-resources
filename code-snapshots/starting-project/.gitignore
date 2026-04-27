@@ -42,3 +42,6 @@ next-env.d.ts
 
 # database
 data/*.db
+*.db-wal
+*.db-shm
+code-snapshots/starting-project/.claude/settings.local.json
