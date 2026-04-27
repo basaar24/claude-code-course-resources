@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(ts|tsx|js|jsx\\)$|\\\\.json$|\\\\.md$\")",
+      "WebSearch",
+      "WebFetch(domain:better-auth.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:tiptap.dev)"
+    ]
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true
+  }
+}
