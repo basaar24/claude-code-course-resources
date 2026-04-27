@@ -25,6 +25,23 @@ export function getNoteById(id: string, userId: string): Note | undefined {
   );
 }
 
+export function updateNote(
+  id: string,
+  userId: string,
+  title: string,
+  contentJson: string
+): void {
+  run(
+    `UPDATE notes SET title = ?, content_json = ?, updated_at = datetime('now')
+     WHERE id = ? AND user_id = ?`,
+    [title, contentJson, id, userId]
+  );
+}
+
+export function deleteNote(id: string, userId: string): void {
+  run(`DELETE FROM notes WHERE id = ? AND user_id = ?`, [id, userId]);
+}
+
 export function createNote(
   userId: string,
   title: string,
